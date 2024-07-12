@@ -1,0 +1,49 @@
+use std::str::FromStr;
+use crate::dimacs::{Dimacs, DimacsHeader, Clause, Atom, ParseError};
+
+grammar;
+
+pub Dimacs: Dimacs  = {
+    <header:DimacsHeader> <clauses:Clause*> End? => {
+        Dimacs {
+            vars: header.vars,
+            clauses: clauses,
+        }
+    }
+};
+
+End : () = {
+    "%\n0" => (),
+};
+
+
+DimacsHeader: DimacsHeader = {
+    //<comments:Comment*> "p" "cnf" <vars:Number> <clauses:Number> => DimacsHeader {
+    <comments:Comment*> "p cnf" <vars:Number> <clauses:Number> => DimacsHeader {
+        vars: vars,
+        clauses: clauses,
+    }
+};
+
+Comment: () = {
+    r"c[^\n]*\n" => (),
+};
+
+Clause: Clause = {
+    <atoms:Atom+> "0" => Clause(atoms),
+};
+
+Atom: Atom = {
+    <n:Number> => Atom::Pos(n),
+    "-" <n:Number> => Atom::Neg(n),
+};
+
+Number: u128 = {
+    r"[0-9]+" => u128::from_str(<>).map_err(|_| ParseError::Err("Invalid number".to_string())).unwrap(),
+};
+
+match {
+    r"\s+" => { }, // Ignore whitespace
+    r"%.*\n" => { }, // Ignore lines starting with %
+    _
+}
