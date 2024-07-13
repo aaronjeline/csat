@@ -13,31 +13,32 @@ enum ControlFlow {
 pub fn solve(dimacs: &Dimacs) -> Option<Assignment> {
     let mut kb = build_kb(&dimacs);
 
-    match explore(&mut kb) {
+    match explore(&kb) {
         ControlFlow::Done(assignment) => Some(assignment),
         ControlFlow::Backtrack => None,
     }
 }
 
-fn explore(kb: &mut KnowledgeBase) -> ControlFlow {
-    if !unit_propagation(kb) {
+fn explore(greater_kb: &KnowledgeBase) -> ControlFlow {
+    let mut kb = greater_kb.clone();
+    if !unit_propagation(&mut kb) {
         // Branch is unsatisfiable
         return ControlFlow::Backtrack;
     }
 
-    let next = choose_literal(kb);
+    let next = choose_literal(&kb);
     if let Some(ref x) = next {
         info!("Exploring: {x}")
     }
 
-    match choose_literal(&kb) {
+    match next {
         // If we have no more unassigned literals, we have a model
         None => ControlFlow::Done(kb.assignment.clone()),
         Some(var) => {
             info!("Trying `true`");
             // First we explore the true branch
             kb.mutate(var, true);
-            match explore(kb) {
+            match explore(&kb) {
                 // If the true branch is satisfiable, we are done
                 ControlFlow::Done(assignment) => {
                     return ControlFlow::Done(assignment);
@@ -48,13 +49,14 @@ fn explore(kb: &mut KnowledgeBase) -> ControlFlow {
                     info!("Back tracked to {var}, trying `false` ");
                     // Then we explore the false branch
                     kb.mutate(var, false);
-                    match explore(kb) {
+                    match explore(&kb) {
                         // If the false branch is satisfiable, we are done
                         ControlFlow::Done(assignment) => return ControlFlow::Done(assignment),
                         // If the false branch is unsatisfiable, we backtrack
                         ControlFlow::Backtrack => {
                             info!("{var} is unsatisfiable, backtracking.");
-                            kb.unassign(var);
+                            // This knowledge base is dead
+                            drop(kb);
                             return ControlFlow::Backtrack;
                         }
                     }
@@ -80,6 +82,7 @@ fn build_kb<'a>(dimacs: &'a Dimacs) -> KnowledgeBase<'a> {
 // Probably want this to be a more efficient type later
 type Set = HashSet<u128>;
 
+#[derive(Debug, Clone)]
 struct KnowledgeBase<'a> {
     clauses: &'a [Clause],
     assignment: Assignment,

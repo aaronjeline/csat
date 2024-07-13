@@ -12,7 +12,7 @@ fn main() {
     let dimacs = dimacs::parse(&buf).unwrap();
     match dpllsolver::solve(&dimacs) {
         Some(model) => {
-            println!("SAT");
+            println!("IS SAT");
             for (var, value) in model.iter() {
                 println!("{}: {}", var, value);
             }
