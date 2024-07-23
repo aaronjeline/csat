@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import json
 import subprocess
@@ -7,8 +8,10 @@ from statistics import mean
 
 def run_test(file_path):
     start_time = time.time()
-    result = subprocess.run(['cargo', 'run'], input=open(file_path, 'rb').read(),
+    print('About to run')
+    result = subprocess.run(['cargo', 'run', '--release'], input=open(file_path, 'r').read(),
                             capture_output=True, text=True)
+    print('running')
     end_time = time.time()
     return result.stdout.strip(), end_time - start_time
 
