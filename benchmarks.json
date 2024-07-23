@@ -1,0 +1,95 @@
+{
+  "base_url" : "https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html",
+  "uniform_random_3sat": [
+    {
+      "variables": 50,
+      "clauses": 218,
+      "instances": 1000,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf50-218.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf50-218.tar.gz"
+      }
+    },
+    {
+      "variables": 75,
+      "clauses": 325,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf75-325.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf75-325.tar.gz"
+      }
+    },
+    {
+      "variables": 100,
+      "clauses": 430,
+      "instances": 1000,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf100-430.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf100-430.tar.gz"
+      }
+    },
+    {
+      "variables": 125,
+      "clauses": 538,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf125-538.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf125-538.tar.gz"
+      }
+    },
+    {
+      "variables": 150,
+      "clauses": 645,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf150-645.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf150-645.tar.gz"
+      }
+    },
+    {
+      "variables": 175,
+      "clauses": 753,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf175-753.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf175-753.tar.gz"
+      }
+    },
+    {
+      "variables": 200,
+      "clauses": 860,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf200-860.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf200-860.tar.gz"
+      }
+    },
+    {
+      "variables": 225,
+      "clauses": 960,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf225-960.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf225-960.tar.gz"
+      }
+    },
+    {
+      "variables": 250,
+      "clauses": 1065,
+      "instances": 100,
+      "satisfiability": "all sat/unsat",
+      "links": {
+        "satisfiable": "Benchmarks/SAT/RND3SAT/uf250-1065.tar.gz",
+        "unsatisfiable": "Benchmarks/SAT/RND3SAT/uuf250-1065.tar.gz"
+      }
+    }
+  ]
+}
