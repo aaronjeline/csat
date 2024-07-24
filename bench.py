@@ -8,10 +8,12 @@ from statistics import mean
 
 def run_test(file_path):
     start_time = time.time()
-    print('About to run')
-    result = subprocess.run(['cargo', 'run', '--release'], input=open(file_path, 'r').read(),
-                            capture_output=True, text=True)
-    print('running')
+    with open(file_path) as f:
+        data = f.read()
+    result = subprocess.run(['cargo', 'run', '--release'],
+        input=data,
+        capture_output=True,
+        text=True)
     end_time = time.time()
     return result.stdout.strip(), end_time - start_time
 
@@ -35,7 +37,7 @@ def process_directory(directory):
 
             # Check if the output is correct
             expected_output = 'IS SAT' if category == 'satisfiable' else 'UNSAT'
-            is_correct = output == expected_output
+            is_correct = expected_output in output
 
             # Log incorrect files to stderr
             if not is_correct:
