@@ -30,7 +30,7 @@ def process_directory(directory):
             file_count += 1
 
             # Determine the category (satisfiable or unsatisfiable)
-            category = 'satisfiable' if 'satisfiable' in root else 'unsatisfiable'
+            category = 'unsatisfiable' if 'unsatisfiable' in root else 'satisfiable'
 
             # Determine the number of clauses from the directory name
             clauses = root.split(os.path.sep)[-2] if category in root else root.split(os.path.sep)[-1]
