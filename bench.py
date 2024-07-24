@@ -10,7 +10,7 @@ import argparse
 def run_test(file_path, timeout):
     start_time = time.time()
     try:
-        result = subprocess.run(['cargo', 'run'], input=open(file_path, 'rb').read(),
+        result = subprocess.run(['cargo', 'run'], input=open(file_path, 'r').read(),
                                 capture_output=True, text=True, timeout=timeout)
         end_time = time.time()
         return result.stdout.strip(), end_time - start_time, False
